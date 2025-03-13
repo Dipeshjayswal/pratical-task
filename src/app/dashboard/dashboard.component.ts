@@ -111,11 +111,17 @@ export class DashboardComponent {
     ).afterClosed().subscribe((result) => {
       // console.log(result);
       if (result) {
-        if (task) {
-          this[list][index!] = result;
-        } else {
-          this.todo.unshift(result);
-        }
+        // if (task) {
+        //   this[list][index!] = result;
+        // } else {
+        //   // this.todo.unshift(result);
+        // }
+        this.selectedCate = 'All';
+        const taskList: Task[] = JSON.parse(localStorage.getItem('taskData') || '[]');
+        this.todo = taskList.filter((item: Task) => !item.complated);
+        this.done = taskList.filter((item: Task) => item.complated);
+
+
       }
     });
   }

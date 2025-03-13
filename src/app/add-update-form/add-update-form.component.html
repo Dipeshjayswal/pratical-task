@@ -43,7 +43,7 @@
   <div class="button-group">
     <button mat-stroked-button type="button" (click)="closeDialog()">Cancel</button>
     <button mat-flat-button color="primary" type="submit" [disabled]="taskForm.invalid">
-      {{ taskForm.get('title')?.value ? 'Update' : 'Save' }}
+      {{ data ? 'Update' : 'Save' }}
     </button>
   </div>
 </form>

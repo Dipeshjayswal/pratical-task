@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="dialog-title">Create Task</h2>
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="dialog-container">
+  <mat-form-field appearance="outline" class="full-width" color="primary">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Enter task title" required>
+    <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+      Title is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width" color="primary">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" placeholder="Enter task description" required></textarea>
+    <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+      Description is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Priority</mat-label>
+    <mat-select formControlName="priority" required>
+      <mat-option [value]="1">High</mat-option>
+      <mat-option [value]="2">Medium</mat-option>
+      <mat-option [value]="3">Low</mat-option>
+    </mat-select>
+    <mat-error *ngIf="taskForm.get('priority')?.hasError('required')">
+      Priority is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category" required>
+      <mat-option value="Work">Work</mat-option>
+      <mat-option value="Personal">Personal</mat-option>
+      <mat-option value="Urgent">Urgent</mat-option>
+    </mat-select>
+    <mat-error *ngIf="taskForm.get('category')?.hasError('required')">
+      Category is required
+    </mat-error>
+  </mat-form-field>
+
+  <div class="button-group">
+    <button mat-stroked-button type="button" (click)="closeDialog()">Cancel</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="taskForm.invalid">
+      {{ taskForm.get('title')?.value ? 'Update' : 'Save' }}
+    </button>
+  </div>
+</form>
+

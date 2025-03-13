@@ -1,0 +1,27 @@
+<div class="login-container">
+  <form [formGroup]="loginForm" autocomplete="off" (ngSubmit)="onSubmit()" class="login-form">
+    <h2>Login</h2>
+    <mat-form-field appearance="outline" class="input-field">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" placeholder="Enter username">
+      <mat-error *ngIf="formControls['username'].touched && formControls['username'].invalid">
+        <span *ngIf="formControls['username'].errors?.['required']">Username is required.</span>
+        <span *ngIf="formControls['username'].errors?.['minlength']">Username must be at least 3 characters.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="input-field">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Enter password">
+      <mat-error *ngIf="formControls['password'].touched && formControls['password'].invalid">
+        <span *ngIf="formControls['password'].errors?.['required']">Password is required.</span>
+        <span *ngIf="formControls['password'].errors?.['minlength']">Password must be at least 6 characters.</span>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" [disabled]="loginForm.invalid || loading" class="login-button">
+      <span *ngIf="!loading">Login</span>
+      <span *ngIf="loading" class="loading-content">
+        <mat-spinner diameter="20" class="button-spinner"></mat-spinner> Loading...
+      </span>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="header" style="justify-content: center; gap: 20px;display: flex;align-items: center;">
+    <div class="actions" style="display: flex; gap: 10px;">
+      <button mat-raised-button color="secondary" class="category-btn" [ngClass]="selectedCate === 'All' ? 'active':'' " (click)="filterCategory('All')">All</button>
+      <button mat-raised-button color="primary" class="category-btn" [ngClass]="selectedCate === 'Work' ? 'active':'' " (click)="filterCategory('Work')">Work</button>
+      <button mat-raised-button color="accent" class="category-btn" [ngClass]="selectedCate === 'Personal' ? 'active':'' " (click)="filterCategory('Personal')">Personal</button>
+      <button mat-raised-button color="warn" class="category-btn" [ngClass]="selectedCate === 'Urgent' ? 'active':'' " (click)="filterCategory('Urgent')">Urgent</button>
+    </div>
+    <div class="search-create" style="display: flex; gap: 10px; align-items: center;">
+      <mat-form-field appearance="outline" class="search-field d-flex align-items-center" style="margin-bottom: 0;">
+        <input matInput placeholder="Search tasks..." [(ngModel)]="searchTerm">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="create-btn" (click)="openDialog()">
+        <mat-icon>add</mat-icon> Create Task
+      </button>
+      <button mat-raised-button color="primary" class="create-btn" (click)="logoutUser()">
+        <mat-icon>account_circle</mat-icon>Logout
+      </button>
+    </div>
+  </div>
+
+  <div class="task-lists" >
+    <div class="task-column">
+      <h2>Todo
+        <mat-icon *ngIf="sortDirection['todo'] === 'none'" (click)="sortTasks('asc', 'todo')">arrow_upward</mat-icon>
+        <mat-icon *ngIf="sortDirection['todo'] === 'asc'" (click)="sortTasks('desc', 'todo')">arrow_downward</mat-icon>
+        <mat-icon *ngIf="sortDirection['todo'] === 'desc'" (click)="sortTasks('none', 'todo')">sync_alt</mat-icon>
+     </h2>
+      <div cdkDropList
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <mat-card class="task-card" *ngFor="let item of todo | taskSearch:searchTerm; let i = index;">
+        <mat-card-content cdkDrag>
+          <div class="task">
+            <span [ngClass]="getPriorityClass(item?.priority)">{{PRIORITY[item?.priority]}}</span>
+            <h3>{{item.title}}</h3>
+            <p>{{item.description}}</p>
+            <p>{{item.category}}</p>
+            <div class="task-actions">
+              <button mat-icon-button (click)="openDialog(item, 'todo', i)"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button><mat-icon (click)="deleteList('todo',i)">delete</mat-icon></button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      </div>
+  </div>
+
+    <div class="task-column">
+      <h2>Complated
+        <mat-icon *ngIf="sortDirection['done'] === 'none'" (click)="sortTasks('asc', 'done')">arrow_upward</mat-icon>
+        <mat-icon *ngIf="sortDirection['done'] === 'asc'" (click)="sortTasks('desc', 'done')">arrow_downward</mat-icon>
+        <mat-icon *ngIf="sortDirection['done'] === 'desc'" (click)="sortTasks('none', 'done')">sync_alt</mat-icon>
+      </h2>
+      <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <mat-card class="task-card" *ngFor="let item of done | taskSearch:searchTerm; let i = index;">
+        <mat-card-content cdkDrag>
+          <div class="task">
+            <span [ngClass]="getPriorityClass(item?.priority)">{{PRIORITY[item?.priority]}}</span>
+            <h3>{{item.title}}</h3>
+            <p>{{item.description}}</p>
+            <p>{{item.category}}</p>
+            <div class="task-actions">
+              <button mat-icon-button (click)="openDialog(item, 'done', i)"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button (click)="deleteList('done',i)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

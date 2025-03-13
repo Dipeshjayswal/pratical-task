@@ -1,0 +1,146 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  gap: 30px;
+  background: #f4f6f9;
+}
+
+.example-list {
+  border: solid 1px #ccc;
+  min-height: 100%;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  padding: 16px;
+}
+
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.category-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+.category-btn.active {
+  background: #1e88e5;
+  color: white;
+}
+
+.search-create {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-field, .sort-field {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  // background: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+mat-icon {
+  margin-right: 5px;
+}
+
+.create-btn {
+  background: #4CAF50;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.task-lists {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.task-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 45%;
+}
+
+.task-card {
+  background: #f0f0f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: transform 0.2s ease-in-out;
+  margin-bottom: 10px;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+}
+
+.task {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.priority.high {
+  color: red;
+  font-weight: bold;
+}
+
+.priority.low {
+  color: green;
+  font-weight: bold;
+}
+
+.priority.medium {
+  color: orange;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .search-create {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+  .task-lists {
+    flex-direction: column;
+    align-items: center;
+  }
+  .task-column {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.icon-rotate{    rotate: 90deg;}
+.cursor-pointer{cursor: pointer;}
